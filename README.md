@@ -1,15 +1,19 @@
 # 알림톡 자동화 모듈
- >Start Date: 2016/07/26 (화)
+ >Start Date: 2016/07/26
 
- >1st Prototype: 2016/07/27 (수)
- - 사전알림신청내역/알림톡 서버 연결, INSERT하는 두 테이블(pre_order_coupon, MZSENDTRAN)과 동일한 환경의 테스트 테이블에 입력
+ >1st Prototype: 완료 - 2016/07/27
+ - 사전알림신청내역/알림톡 서버 연결 
+ - CSV 파일 변환 및 자료구조 정의
+ - INSERT하는 두 테이블(pre_order_coupon, MZSENDTRAN)과 동일한 환경의 테스트 테이블에 입력
 
- >2nd Prototype: ~ ing
+ >2nd Prototype: 진행중 
  - 1st Prototype의 코드 다듬기 작업
  - CSV파일 변환코드 개선
 
+
 ## Purpose
 알림톡을 보내는 과정에 있어 여러번의 Query작성과 파일 변환을 해야 되는 과정을 간소화시키기 위해 제작.
+
 
 ### 기존의 알림톡 발송과정
 >1. 사전알림신청내역서버/GAME DB 내의 pre_order_genre_reserve(장르별 자동알림 신청자)테이블과 pre_order_reserve_game(특정 게임 알림 신청자)테이블을 UNION
@@ -24,7 +28,8 @@
 
 이러한 여러 과정을 하나의 모듈로 통합하게 되면 시간 및 자원을 크게 절감
 
-## 1st Prototype - COMPLETED 2016/07/27 수요일
+
+## 1st Prototype: 완료 - 2016/07/27
 
 
 # 제한사항
