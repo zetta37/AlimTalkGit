@@ -12,45 +12,40 @@ public class ServerConnector {
 
     public static void main(String[] args){
 
-        //final String driver = "org.mariadb.jdbc.Driver";
-        final ConnectingInfo earlyBirdServer
-                = new ConnectingInfo("jdbc:mysql://10.30.143.54", "gametest", "gametestpw");
-        final ConnectingInfo alimTalkServer
-                = new ConnectingInfo("jdbc:mysql://10.28.162.153", "cuser", "cuserpw");
-        Connection dbConn = null;
-        File csvFile;
+        final ConnectionInfo preOrderServer
+                = new ConnectionInfo("jdbc:mysql://10.30.143.54", "gametest", "gametestpw");
+        final ConnectionInfo alimTalkServer
+                = new ConnectionInfo("jdbc:mysql://10.28.162.153", "cuser", "cuserpw");
+        Connection alimConn;
+        Connection preOrderConn;
+        ResultSet rs;
+        String csvFileDirectory;
+        CSVConverter cvt;
 
         try {
+//            cvt = new CSVConverter(args[0]);
+            cvt = new CSVConverter("/Users/mf839-005/Desktop/workspace/AlimTalk/csvTestFile.csv");
 
-            //Class.forName(driver);
 
-            dbConn = DriverManager.getConnection(alimTalkServer.getIP(),
-                                                 alimTalkServer.getID(),
-                                                 alimTalkServer.getPwd());
+            alimConn = DriverManager.getConnection( alimTalkServer.getIP(),
+                                                    alimTalkServer.getID(),
+                                                    alimTalkServer.getPwd());
 
-            //dbConn = DriverManager.getConnection(earlyBirdServer.getIP(),
-            //                                     earlyBirdServer.getID(),
-            //                                     earlyBirdServer.getPwd());
-            java.sql.Statement st = dbConn.createStatement();
-            ResultSet rs = st.executeQuery("SHOW databases");
 
-            if (st.execute("SHOW databases")){
-                rs= st.getResultSet();
-            }
+            preOrderConn = DriverManager.getConnection( preOrderServer.getIP(),
+                                                        preOrderServer.getID(),
+                                                        preOrderServer.getPwd());
 
-            while (rs.next()){
-                //String
-                String str = rs.getString(1);
-                System.out.println(str);
-            }
+            java.sql.Statement state = alimConn.createStatement();
+            cvt.queryProcessor(state, "alimTalkServer");
 
-        } catch (SQLException sqlExpt){
+            state = preOrderConn.createStatement();
+            cvt.queryProcessor(state, "preOrderServer");
+
+
+        } catch (SQLException sqlExpt) {
             System.out.println("** FAILURE: SQLException --  " + sqlExpt.getMessage());
-            //System.out.println("SQLState: "+ sqlExpt.getSQLState());
+            System.out.println("            SQLState: " + sqlExpt.getSQLState());
         }
-        /*catch (ClassNotFoundException cnfExpt){
-            System.out.println("** FAILURE: ClassNotFoundException -- Driver Loading");
-        }*/
-
     }
 }
