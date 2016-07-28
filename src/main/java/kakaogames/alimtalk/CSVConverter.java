@@ -2,23 +2,25 @@
  * Created by mf839-005 on 2016. 7. 26..
  */
 
+package kakaogames.alimtalk;
+
 import java.io.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class CSVConverter {
+class CSVConverter {
 
     private File csvFile;
     private ArrayList<CSVInfo> csvTable;
 
-    public CSVConverter(String filePath) {
+    CSVConverter(File csvFile) {
 
         try {
 
-            this.csvFile = new File(filePath);
+            this.csvFile = csvFile;
             BufferedReader br = new BufferedReader(new FileReader(this.csvFile));
-            String str = "";
-            String[] token = null;
+            String str;
+            String[] token;
             this.csvTable = new ArrayList<CSVInfo>();
             CSVInfo csvData;
 
@@ -26,47 +28,40 @@ public class CSVConverter {
 
                 csvData = new CSVInfo();
                 token = str.split(",");
-//                System.out.println("\nTOKEN LENGTH: " + token.length);
-//
-//                for (int i=0; i<token.length; i++){
-//                    System.out.print(token[i].toString()+ "    ");
-//
-//                }
 
                 for (int i=0; i<token.length; i++){
 
                     switch(i){
                         case 1:
-                            csvData.setSENDER_KEY(token[0].toString());
+                            csvData.setSENDER_KEY(token[0]);
                         case 2:
-                            csvData.setCHANNEL(token[1].toString());
+                            csvData.setCHANNEL(token[1]);
                         case 3:
-                            csvData.setPHONE_NUM(token[2].toString());
+                            csvData.setPHONE_NUM(token[2]);
                         case 4:
-                            csvData.setTMPL_CD(token[3].toString());
+                            csvData.setTMPL_CD(token[3]);
                         case 5:
-                            csvData.setSMS_SND_NUM(token[4].toString());
+                            csvData.setSMS_SND_NUM(token[4]);
                         case 6:
-                            csvData.setREQ_DTM(token[5].toString());
+                            csvData.setREQ_DTM(token[5]);
                         case 7:
-                            csvData.setSMS_SND_YN(token[6].toString());
+                            csvData.setSMS_SND_YN(token[6]);
                         case 8:
-                            csvData.setTRAN_STS(token[7].toString());
+                            csvData.setTRAN_STS(token[7]);
                         case 9:
-                            csvData.setMEMBER_ID(token[8].toString());
+                            csvData.setMEMBER_ID(token[8]);
                         case 10:
-                            csvData.setCOUPON_NO(token[9].toString());
+                            csvData.setCOUPON_NO(token[9]);
                         case 11:
-                            csvData.setSND_MSG(token[10].toString());
+                            csvData.setSND_MSG(token[10]);
                         case 12:
-                            csvData.setUserid(token[11].toString());
+                            csvData.setUserid(token[11]);
                         case 13:
-                            csvData.setPre_order_id(token[12].toString());
+                            csvData.setPre_order_id(token[12]);
                         default:
                     }
                 }
 
-                System.out.println(csvData.getCHANNEL());
                 csvTable.add(csvData);
             }
 
@@ -76,44 +71,39 @@ public class CSVConverter {
 
     }
 
-    public void queryProcessor(java.sql.Statement st, String dbName) {
+    void queryProcessor(java.sql.Statement statement, String dbName) {
 
         String columns;
         String data;
 
+        //알림톡 INSERT
         if(dbName.equals("alimTalkServer")) {
+
             try {
-
                 columns = csvTable.get(0).alimTalkColumnFormat();
-
-                st.addBatch("use test");
-
+                statement.addBatch("use test");
                 for (int i = 1; i<csvTable.size(); i++){
                     data = csvTable.get(i).alimTalkDataFormat();
-                    st.addBatch("insert into Test_Alim1 (" + columns + ") values (" + data + ")");
+                    statement.addBatch("insert into Test_Alim1 (" + columns + ") values (" + data + ")");
                 }
-                st.executeBatch();
-                st.clearBatch();
-
+                statement.executeBatch();
+                statement.clearBatch();
             } catch (SQLException sqlExpt) {
                 System.out.println("** FAILURE: SQLException --  " + sqlExpt.getMessage());
                 System.out.println("            SQLState: " + sqlExpt.getSQLState());
             }
 
+        //사전알림신청내역 INSERT
         } else if (dbName.equals("preOrderServer")) {
             try {
-
                 columns = csvTable.get(0).preOrderColumnFormat();
-
-                st.addBatch("use test");
-
+                statement.addBatch("use test");
                 for (int i = 1; i<csvTable.size(); i++){
                     data = csvTable.get(i).preOrderDataFormat();
-                    st.addBatch("insert into Test_PreOrder (" + columns + ") values (" + data + ")");
+                    statement.addBatch("insert into Test_PreOrder (" + columns + ") values (" + data + ")");
                 }
-                st.executeBatch();
-                st.clearBatch();
-
+                statement.executeBatch();
+                statement.clearBatch();
             } catch (SQLException sqlExpt) {
                 System.out.println("** FAILURE: SQLException --  " + sqlExpt.getMessage());
                 System.out.println("            SQLState: " + sqlExpt.getSQLState());

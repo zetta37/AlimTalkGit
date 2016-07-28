@@ -1,9 +1,14 @@
-import java.util.ArrayList;
+
 
 /**
  * Created by mf839-005 on 2016. 7. 26..
  */
-public class AlimInfo {
+
+package kakaogames.alimtalk;
+
+import java.util.ArrayList;
+
+class AlimInfo {
 
     /*
     private String phoneNum;
@@ -14,20 +19,20 @@ public class AlimInfo {
 
     private ArrayList<Object> info;
 
-    public AlimInfo(){
+    AlimInfo(){
         info = new ArrayList<Object>();
     }
 
-    public void addInfo(Object obj){
+    void addInfo(Object obj){
         info.add(obj);
     }
 
-    public Object getInfo(){
+    Object getInfo(){
         return info.remove(0);
     }
 
     /*
-    public AlimInfo(String phoneNum, int memberID, String couponNum, String msg){
+    public kakaogames.alimtalk.AlimInfo(String phoneNum, int memberID, String couponNum, String msg){
         this.phoneNum = phoneNum;
         this.memberID = memberID;
         this.couponNum = couponNum;

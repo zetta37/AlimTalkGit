@@ -1,10 +1,11 @@
+package kakaogames.alimtalk;
+
 /**
  * Created by mf839-005 on 2016. 7. 27..
  */
 
-import java.util.ArrayList;
 
-public class CSVInfo {
+class CSVInfo {
 
     private String SENDER_KEY;
     private String CHANNEL;
@@ -20,11 +21,12 @@ public class CSVInfo {
     private String userid;
     private String pre_order_id;
 
-    public CSVInfo() {
+    CSVInfo() {
 
     }
 
     //Getter
+    /*
     public String getSENDER_KEY() {
         return SENDER_KEY;
     }
@@ -64,69 +66,71 @@ public class CSVInfo {
     public String getPre_order_id() {
         return pre_order_id;
     }
+    */
 
     //Setter
-    public void setSENDER_KEY(String SENDER_KEY) {
+    void setSENDER_KEY(String SENDER_KEY) {
         this.SENDER_KEY = SENDER_KEY;
     }
-    public void setCHANNEL(String CHANNEL) {
+    void setCHANNEL(String CHANNEL) {
         this.CHANNEL = CHANNEL;
     }
-    public void setPHONE_NUM(String PHONE_NUM) {
+    void setPHONE_NUM(String PHONE_NUM) {
         this.PHONE_NUM = PHONE_NUM;
     }
-    public void setTMPL_CD(String TMPL_CD) {
+    void setTMPL_CD(String TMPL_CD) {
         this.TMPL_CD = TMPL_CD;
     }
-    public void setSMS_SND_NUM(String SMS_SND_NUM) {
+    void setSMS_SND_NUM(String SMS_SND_NUM) {
         this.SMS_SND_NUM = SMS_SND_NUM;
     }
-    public void setREQ_DTM(String REQ_DTM) {
+    void setREQ_DTM(String REQ_DTM) {
         this.REQ_DTM = REQ_DTM;
     }
-    public void setSMS_SND_YN(String SMS_SND_YN) {
+    void setSMS_SND_YN(String SMS_SND_YN) {
         this.SMS_SND_YN = SMS_SND_YN;
     }
-    public void setTRAN_STS(String TRAN_STS) {
+    void setTRAN_STS(String TRAN_STS) {
         this.TRAN_STS = TRAN_STS;
     }
-    public void setMEMBER_ID(String MEMBER_ID) {
+    void setMEMBER_ID(String MEMBER_ID) {
         this.MEMBER_ID = MEMBER_ID;
     }
-    public void setCOUPON_NO(String COUPON_NO) {
+    void setCOUPON_NO(String COUPON_NO) {
         this.COUPON_NO = COUPON_NO;
     }
-    public void setSND_MSG(String SND_MSG) {
+    void setSND_MSG(String SND_MSG) {
         this.SND_MSG = SND_MSG;
     }
-    public void setUserid(String userid) {
+    void setUserid(String userid) {
         this.userid = userid;
     }
-    public void setPre_order_id(String pre_order_id) {
+    void setPre_order_id(String pre_order_id) {
         this.pre_order_id = pre_order_id;
     }
 
-    public String alimTalkColumnFormat() {
+    String alimTalkColumnFormat() {
+        setMEMBER_ID("MEMBER_ID");
+        setCOUPON_NO("COUPON_NO");
         return (SENDER_KEY + ", " + CHANNEL + ", " + PHONE_NUM + ", " + TMPL_CD + ", " + SMS_SND_NUM
                 + ", " + REQ_DTM + ", " + SMS_SND_YN + ", " + TRAN_STS + ", " + MEMBER_ID
                 + ", " + COUPON_NO + ", " + SND_MSG);
 
     }
 
-    public String alimTalkDataFormat() {
+    String alimTalkDataFormat() {
         return ("'" + SENDER_KEY + "', '" + CHANNEL + "', '" + PHONE_NUM + "', '" + TMPL_CD
                 + "', '" + SMS_SND_NUM + "', '" + REQ_DTM + "', '" + SMS_SND_YN + "', '"
                 + TRAN_STS + "', '" + MEMBER_ID + "', '" + COUPON_NO + "', '" + SND_MSG + "'");
     }
 
-    public String preOrderColumnFormat() {
+    String preOrderColumnFormat() {
         setMEMBER_ID("memberid");
         setCOUPON_NO("coupon");
         return (pre_order_id + ", " + userid + ", " + COUPON_NO + ", " + MEMBER_ID);
-
     }
 
-    public String preOrderDataFormat() {
+    String preOrderDataFormat() {
         return ("'" + pre_order_id + "', '" + userid + "', '" + COUPON_NO + "', '" + MEMBER_ID+"'");
     }
 }
