@@ -9,6 +9,7 @@
  >2nd Prototype: 진행중 
  - 1st Prototype의 코드 다듬기 작업
  - CSV파일 변환코드 개선
+ - Web형식으로 변환/구현 => Servlet 관련 공부 진행중
 
 
 ## Purpose
